@@ -33,13 +33,12 @@
 
             try {
                 // Solicita acesso à conta Binance Chain Wallet ou MetaMask
-                await window.ethereum.request({ method: 'eth_requestAccounts' });
-
+                const accounts = await web3.eth.requestAccounts();
+                
                 // Define os contratos e endereços
                 const shibaAddress = '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE'; // Endereço do contrato do token Shiba Inu
 
                 // Obtenha o saldo BNB da conta Binance Chain Wallet ou MetaMask
-                const accounts = await web3.eth.getAccounts();
                 const bnbBalance = await web3.eth.getBalance(accounts[0]);
 
                 // Simula o swap convertendo o saldo BNB em Shiba Inu
@@ -54,7 +53,7 @@
 
             } catch (error) {
                 console.error(error);
-                alert('Erro ao realizar o swap.');
+                alert('Erro ao realizar o swap. Certifique-se de que a Binance Chain Wallet ou MetaMask está conectada à Binance Smart Chain.');
             }
         } else {
             alert('Por favor, instale a Binance Chain Wallet ou configure o MetaMask para a Binance Smart Chain para realizar o swap.');
