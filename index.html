@@ -4,62 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Swap de BNB para Shiba Inu</title>
-    <!-- Web3.js para Binance Smart Chain -->
-    <script src="https://cdn.jsdelivr.net/gh/binance-chain/bsc@1.0.0-beta.4/web3.min.js"></script>
     <style>
         /* Estilos opcionais */
         .container {
             margin-top: 50px;
             text-align: center;
         }
-        button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            cursor: pointer;
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <button onclick="swapBNBtoShiba()">Swap BNB to Shiba Inu</button>
+    <h2>Swap de BNB para Shiba Inu</h2>
+    <p>Utilize o iframe abaixo para realizar o swap:</p>
+    <iframe src="https://exchange.pancakeswap.finance/#/swap?inputCurrency=BNB&outputCurrency=0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE" frameborder="0"></iframe>
 </div>
-
-<script>
-    async function swapBNBtoShiba() {
-        // Verifique se a Web3 foi injetada pela Binance Chain Wallet ou MetaMask
-        if (typeof window.BinanceChain !== 'undefined' || (typeof window.ethereum !== 'undefined' && window.ethereum.isBinanceSmartChain)) {
-            const web3 = new Web3(window.BinanceChain || window.ethereum);
-
-            try {
-                // Solicita acesso à conta Binance Chain Wallet ou MetaMask
-                const accounts = await web3.eth.requestAccounts();
-                
-                // Define os contratos e endereços
-                const shibaAddress = '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE'; // Endereço do contrato do token Shiba Inu
-
-                // Obtenha o saldo BNB da conta Binance Chain Wallet ou MetaMask
-                const bnbBalance = await web3.eth.getBalance(accounts[0]);
-
-                // Simula o swap convertendo o saldo BNB em Shiba Inu
-                // (Este é um exemplo simplificado, você precisará de um contrato inteligente real para realizar o swap real)
-                const shibaAmount = web3.utils.toBN(bnbBalance).div(web3.utils.toBN(100)); // Converte 1% do saldo BNB para Shiba Inu
-
-                // Imprime o saldo BNB e a quantidade de Shiba Inu a ser recebida
-                console.log(`BNB Balance: ${web3.utils.fromWei(bnbBalance, 'ether')} BNB`);
-                console.log(`Shiba Inu Amount to Receive: ${web3.utils.fromWei(shibaAmount, 'ether')} Shiba Inu`);
-
-                alert(`BNB Balance: ${web3.utils.fromWei(bnbBalance, 'ether')} BNB\nShiba Inu Amount to Receive: ${web3.utils.fromWei(shibaAmount, 'ether')} Shiba Inu`);
-
-            } catch (error) {
-                console.error(error);
-                alert('Erro ao realizar o swap. Certifique-se de que a Binance Chain Wallet ou MetaMask está conectada à Binance Smart Chain.');
-            }
-        } else {
-            alert('Por favor, instale a Binance Chain Wallet ou configure o MetaMask para a Binance Smart Chain para realizar o swap.');
-        }
-    }
-</script>
 
 </body>
 </html>
